@@ -2,6 +2,7 @@ import argparse
 import os
 from PIL import Image, ImageFilter
 from colorama import init
+import codecs
 
 # ASCII character sets
 ASCII_CHARS = "@%#*+=-:. "
@@ -120,6 +121,24 @@ class CustomArgumentParser(argparse.ArgumentParser):
         return ascii_header + "\n" + super().format_help()
 
 
+def convert_cp437_to_utf8(input_file, output_file):
+    """Convert CP437 encoded ANSI art to UTF-8."""
+    with open(input_file, "rb") as f:
+        content = f.read()
+    utf8_content = codecs.decode(content, "cp437").encode("utf-8")
+    with open(output_file, "wb") as f:
+        f.write(utf8_content)
+
+
+def convert_utf8_to_cp437(input_file, output_file):
+    """Convert UTF-8 encoded ASCII art to CP437."""
+    with open(input_file, "rb") as f:
+        content = f.read()
+    cp437_content = codecs.decode(content, "utf-8").encode("cp437")
+    with open(output_file, "wb") as f:
+        f.write(cp437_content)
+
+
 def main():
     """Parse command-line arguments and run the conversion."""
     parser = CustomArgumentParser(description="Convert an image to ASCII art.")
@@ -154,7 +173,30 @@ def main():
         "-i", "--invert", action="store_true", help="Invert ASCII brightness mapping"
     )
 
+    parser.add_argument(
+        "-f",
+        "--format",
+        choices=["cp437-to-utf8", "utf8-to-cp437"],
+        help="Convert between CP437 and UTF-8 formats",
+    )
+    parser.add_argument(
+        "-o",
+        "--output",
+        help="Path to the output file for format conversion",
+    )
+
     args = parser.parse_args()
+
+    if args.format:
+        if not args.output:
+            print("Error: Output file must be specified for format conversion.")
+            return
+        if args.format == "cp437-to-utf8":
+            convert_cp437_to_utf8(args.image, args.output)
+        elif args.format == "utf8-to-cp437":
+            convert_utf8_to_cp437(args.image, args.output)
+        print(f"Conversion completed: {args.image} -> {args.output}")
+        return
 
     if not os.path.exists(args.image):
         print("Error: File not found.")
