@@ -39,6 +39,7 @@ optional color, block characters, and edge detection.
 - **Block character mode** for improved resolution
 - **Edge detection** to highlight image details
 - **Invert mode** to reverse brightness mapping
+- Convert existing ascii/Ansi art between cp437 and UTF-8 encoding
 
 ## Dependencies
 
@@ -121,9 +122,6 @@ python pic2ascii.py image.jpg -w 100 -e 50
 ```
 
 #### Convert old cp437 formattet ascii art to utf8
-
-```
-```
 
 ```sh
 python pic2ascii.py image.ans -f cp437-to-utf8 -o image.utf8
