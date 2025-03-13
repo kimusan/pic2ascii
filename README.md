@@ -24,6 +24,7 @@
       - [Convert an image with color:](#convert-an-image-with-color)
       - [Use block characters for better resolution:](#use-block-characters-for-better-resolution)
       - [Apply edge detection with intensity 50:](#apply-edge-detection-with-intensity-50)
+      - [Convert old cp437 formattet ascii art to utf8:](#convert-old-cp437-formattet-ascii-art-to-utf8)
   - [License](#license)
   - [Author](#author)
 <!--toc:end-->
@@ -81,11 +82,17 @@ python pic2ascii.py <image_path> [options]
 
 ### Options
 
-- `-w, --width <int>`  → Set the ASCII output width (default: 100)
-- `-c, --color`        → Enable colored ASCII output
-- `-b, --block`        → Use block characters instead of normal ASCII
-- `-i, --invert`       → Invert brightness mapping
-- `-e, --edge <0-100>` → Apply edge detection (intensity 0-100)
+- `-w, --width <int>`        → Set the ASCII output width (default: 100)
+- `-c, --color`              → Enable colored ASCII output
+- `-b, --block`              → Use block characters instead of normal ASCII
+- `-i, --invert`             → Invert brightness mapping
+- `-e, --edge <0-100>`       → Apply edge detection (intensity 0-100)
+- `-f, --format <direction>` → Select format direction to
+                             convert between. Possible directions are
+                             `cp437-to-utf8` and `utf8-to-cp437`.
+                             Input file is given as alternative to the `<image>`
+                             and can be in either utf8 or cp437 format.
+-`-o, --output <out-file>`   → the output filename if converting between formats
 
 ### Examples
 
@@ -111,6 +118,15 @@ python pic2ascii.py image.png -w 100 -b
 
 ```sh
 python pic2ascii.py image.jpg -w 100 -e 50
+```
+
+#### Convert old cp437 formattet ascii art to utf8
+
+```
+```
+
+```sh
+python pic2ascii.py image.ans -f cp437-to-utf8 -o image.utf8
 ```
 
 ## License
