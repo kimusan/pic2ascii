@@ -88,12 +88,12 @@ python pic2ascii.py <image_path> [options]
 - `-b, --block`              → Use block characters instead of normal ASCII
 - `-i, --invert`             → Invert brightness mapping
 - `-e, --edge <0-100>`       → Apply edge detection (intensity 0-100)
-- `-f, --format <direction>` → Select format direction to
-                             convert between. Possible directions are
-                             `cp437-to-utf8` and `utf8-to-cp437`.
-                             Input file is given as alternative to the `<image>`
+- `-f, --format <direction>` → Select format direction to convert between.\
+                             Possible directions are:\
+                             `cp437-to-utf8` and `utf8-to-cp437`.\
+                             Input file is given as alternative to the `<image>`\
                              and can be in either utf8 or cp437 format.
--`-o, --output <out-file>`   → the output filename if converting between formats
+- `-o, --output <out-file>`   → the output filename if converting between formats
 
 ### Examples
 
